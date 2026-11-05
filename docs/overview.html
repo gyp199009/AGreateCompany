@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AGreateCompany · 产品方向与技术路线 一页纸</title>
+<style>
+  :root{
+    --ink:#16130f;
+    --ink-2:#403a33;
+    --ink-3:#7a7069;
+    --paper:#f7f4ee;
+    --paper-2:#efe9df;
+    --line:#d9d0c2;
+    --accent:#0f5c4f;      /* 深松绿 */
+    --accent-2:#b4472a;    /* 朱 */
+    --gold:#a5822c;
+    --radius:2px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    font-size:15px;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(circle at 12% 8%, rgba(15,92,79,.05), transparent 42%),
+                     radial-gradient(circle at 88% 92%, rgba(180,71,42,.05), transparent 45%);
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:56px 40px 80px}
+  h1,h2,h3,h4{font-family:"Songti SC","Source Han Serif SC","Noto Serif CJK SC",Georgia,"Times New Roman",serif;font-weight:600;letter-spacing:.01em}
+  .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  hr{border:0;border-top:1px solid var(--line);margin:0}
+
+  /* ---------- header ---------- */
+  header{border-top:3px solid var(--ink);padding-top:22px;margin-bottom:52px}
+  .brandrow{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .brand{font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-family:ui-monospace,Menlo,monospace;color:var(--ink-2)}
+  .brand b{color:var(--accent)}
+  h1{font-size:clamp(30px,4.4vw,50px);line-height:1.25;margin:22px 0 16px;max-width:20em}
+  h1 em{font-style:normal;color:var(--accent);border-bottom:2px solid rgba(15,92,79,.25)}
+  .lede{font-size:17px;color:var(--ink-2);max-width:46em;margin:0}
+  .meta{margin-top:26px;display:flex;gap:26px;flex-wrap:wrap;font-size:12px;color:var(--ink-3);font-family:ui-monospace,Menlo,monospace}
+
+  /* ---------- section ---------- */
+  section{margin-bottom:56px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:22px}
+  .sec-num{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--accent-2);letter-spacing:.1em;padding-top:4px}
+  .sec-head h2{font-size:22px;margin:0}
+  .sec-head .note{margin-left:auto;font-size:12px;color:var(--ink-3);text-align:right}
+
+  /* ---------- north star ---------- */
+  .star{background:var(--ink);color:#f5efe4;padding:26px 28px;border-radius:var(--radius);display:grid;grid-template-columns:1.55fr 1fr;gap:28px}
+  .star .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#a89e8f;font-family:ui-monospace,Menlo,monospace}
+  .star .v{font-family:"Songti SC","Source Han Serif SC",Georgia,serif;font-size:25px;line-height:1.5;margin-top:8px;color:#fff}
+  .star .sub{font-size:13px;color:#b8ae9e;margin-top:12px;line-height:1.7}
+  .guards{border-left:1px solid rgba(245,239,228,.22);padding-left:26px}
+  .guards ul{margin:10px 0 0;padding:0;list-style:none;font-size:12.5px;color:#cfc6b7}
+  .guards li{padding:5px 0;border-bottom:1px dotted rgba(245,239,228,.14);display:flex;justify-content:space-between;gap:10px}
+  .guards li span:last-child{color:#8c8272;font-family:ui-monospace,Menlo,monospace;font-size:11px;white-space:nowrap}
+
+  /* ---------- product stack ---------- */
+  .stack{display:grid;gap:10px}
+  .layer{
+    display:grid;grid-template-columns:88px 1fr 220px;gap:20px;align-items:center;
+    border:1px solid var(--line);border-left:3px solid var(--accent);
+    background:#fdfbf7;padding:16px 20px;border-radius:var(--radius);
+  }
+  .layer.public{border-left-color:var(--gold);background:#fbf8ef}
+  .layer.core{border-left-color:var(--accent-2);background:var(--paper-2)}
+  .layer .tag{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink-3);letter-spacing:.12em}
+  .layer .tag b{display:block;font-size:20px;color:var(--ink);letter-spacing:0;font-family:"Songti SC",Georgia,serif;font-weight:600;margin-top:2px}
+  .layer h3{margin:0 0 4px;font-size:16.5px}
+  .layer p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.65}
+  .layer .kpi{font-size:11.5px;color:var(--ink-3);text-align:right;line-height:1.9;font-family:ui-monospace,Menlo,monospace}
+  .layer .kpi b{color:var(--accent);font-weight:600}
+
+  /* ---------- pipeline ---------- */
+  .pipe{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:6px}
+  .step{background:#fdfbf7;border:1px solid var(--line);padding:13px 12px;border-radius:var(--radius);position:relative}
+  .step .n{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--accent-2)}
+  .step h4{margin:5px 0 4px;font-size:13.5px;line-height:1.4}
+  .step p{margin:0;font-size:11.5px;color:var(--ink-3);line-height:1.55}
+  .step.key{background:var(--accent);border-color:var(--accent)}
+  .step.key .n{color:#9ec9bf}
+  .step.key h4{color:#fff}
+  .step.key p{color:#cfe3dd}
+  .pipe-note{font-size:12.5px;color:var(--ink-2);margin-top:12px;padding-left:14px;border-left:2px solid var(--accent-2)}
+
+  /* ---------- timeline ---------- */
+  .tl{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+  .ph{padding:18px 18px 0 0;border-right:1px dashed var(--line)}
+  .ph:last-child{border-right:0;padding-right:0}
+  .ph .q{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.14em;color:var(--accent-2)}
+  .ph h3{margin:6px 0 2px;font-size:17px}
+  .ph .span{font-size:11.5px;color:var(--ink-3);font-family:ui-monospace,Menlo,monospace;margin-bottom:10px}
+  .ph ul{margin:0;padding-left:15px;font-size:12.5px;color:var(--ink-2);line-height:1.75}
+  .ph .exit{margin-top:11px;font-size:11.5px;color:var(--accent);background:rgba(15,92,79,.07);padding:8px 10px;border-radius:var(--radius);line-height:1.6}
+
+  /* ---------- metrics ---------- */
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-family:ui-monospace,Menlo,monospace;font-weight:500;border-bottom:1px solid var(--ink)}
+  td.num{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;white-space:nowrap}
+  tr.hl td{background:rgba(15,92,79,.05)}
+
+  /* ---------- two col ---------- */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+  .card{border:1px solid var(--line);background:#fdfbf7;padding:20px 22px;border-radius:var(--radius)}
+  .card h3{margin:0 0 10px;font-size:16px}
+  .card ul{margin:0;padding-left:17px;font-size:13px;color:var(--ink-2);line-height:1.8}
+  .card li{margin-bottom:3px}
+  .card.no h3{color:var(--accent-2)}
+  .card .small{font-size:12px;color:var(--ink-3);margin:10px 0 0}
+
+  /* ---------- footer ---------- */
+  footer{border-top:3px solid var(--ink);padding-top:18px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--ink-3)}
+  footer .q{font-family:"Songti SC",Georgia,serif;font-size:15px;color:var(--ink-2);max-width:34em}
+
+  @media (max-width:900px){
+    .wrap{padding:36px 22px 60px}
+    .star{grid-template-columns:1fr;gap:20px}
+    .guards{border-left:0;border-top:1px solid rgba(245,239,228,.22);padding-left:0;padding-top:16px}
+    .layer{grid-template-columns:70px 1fr;gap:14px}
+    .layer .kpi{grid-column:2;text-align:left}
+    .pipe{grid-template-columns:repeat(2,1fr)}
+    .tl{grid-template-columns:1fr 1fr}
+    .ph{border-right:0;border-bottom:1px dashed var(--line);padding:16px 12px 14px 0}
+    .two{grid-template-columns:1fr;gap:18px}
+  }
+  @media print{
+    body{background:#fff;font-size:11pt}
+    .wrap{max-width:none;padding:0}
+    section{margin-bottom:26px;break-inside:avoid}
+    .step.key{background:#eee;color:#000}
+    .step.key h4,.step.key p{color:#000}
+    .star{background:#f2f2f2;color:#000}
+    .star .v{color:#000}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brandrow">
+      <div class="brand"><b>A</b>GreatCompany · 战略一页纸</div>
+      <div class="eyebrow">v1.0 · 2026-11</div>
+    </div>
+    <h1>我们不卖答案，<br>我们卖<em>答案的可检验性</em>。</h1>
+    <p class="lede">让"发现"发生的速度提升一个数量级，并让这个过程对所有人可见、可核验、可复现。瓶颈已从"产生想法"转移到"验证想法"——这就是我们的生意。</p>
+    <div class="meta">
+      <span>01 命题 / 02 产品方向 / 03 技术路线 / 04 交付 / 05 风险</span>
+    </div>
+  </header>
+
+  <!-- 01 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">01</div>
+      <h2>北极星与反指标</h2>
+      <div class="note">三个词都是硬约束：可核验 · 被采纳 · 是假设</div>
+    </div>
+    <div class="star">
+      <div>
+        <div class="k">North Star Metric</div>
+        <div class="v">每周被研究者采纳、并进入下一步动作的「可核验假设」数量</div>
+        <div class="sub">不是注册数，不是对话数，不是"节省了多少小时"。一条假设必须能被独立复核，才算数。</div>
+      </div>
+      <div class="guards">
+        <div class="k">Guardrails · 变好时应当警惕</div>
+        <ul>
+          <li><span>无来源断言率</span><span>&gt;2% 阻断</span></li>
+          <li><span>专家抽检驳回率</span><span>须下降</span></li>
+          <li><span>时长↑而采纳数不变</span><span>危险</span></li>
+          <li><span>输出整段复制率</span><span>下降</span></li>
+          <li><span>单次采纳成本</span><span>≤$0.5</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">02</div>
+      <h2>产品组合：一套底座，四个出口</h2>
+      <div class="note">不做两个产品，做一层基础设施 + 两个包装</div>
+    </div>
+    <div class="stack">
+      <div class="layer public">
+        <div class="tag">公共品<b>P3</b></div>
+        <div>
+          <h3>开放证据图谱 Open Evidence Graph</h3>
+          <p>免费 Claim Card API + 公益席位 + 年度《证据质量报告》。既是使命兑现，也是行业标准与信任凭证。</p>
+        </div>
+        <div class="kpi">第 18–36 月<br>外部应用 <b>≥10</b><br>月调用 <b>≥1M</b></div>
+      </div>
+
+      <div class="layer core">
+        <div class="tag">底座<b>P0</b></div>
+        <div>
+          <h3>证据引擎 Evidence Engine</h3>
+          <p>摄取 → 规范化 → 实体链接 → 证据图 → 断言验证 → 评测。把"一句话"变成一张带出处、带冲突、带边界的证据卡。</p>
+        </div>
+        <div class="kpi">判定 F1 <b>≥0.88</b><br>校准 ECE <b>≤0.06</b><br>单卡成本 <b>≤$0.3</b></div>
+      </div>
+
+      <div class="layer">
+        <div class="tag">学术<b>P1</b></div>
+        <div>
+          <h3>Hypothesis Workbench</h3>
+          <p>面向 PI / 博后 / 跨领域进入者：在任何投入三个月之前，告诉你这个假设已被证伪，或从未被真正测过。</p>
+        </div>
+        <div class="kpi">付费 <b>$25–35/月</b><br>采纳率 <b>≥25%</b><br>专家盲评 <b>≥92%</b></div>
+      </div>
+
+      <div class="layer">
+        <div class="tag">产业<b>P2</b></div>
+        <div>
+          <h3>R&D Intelligence</h3>
+          <p>材料 / 化工 / 生物医药研发：立项尽调包、专利文献风险体检、内部知识缝合。私有化优先——那是采购的硬门槛。</p>
+        </div>
+        <div class="kpi">项目 <b>$15–40k</b><br>年许可 <b>$80–250k</b><br>交付 <b>≤5 人日</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">03</div>
+      <h2>核心技术链路</h2>
+      <div class="note">生成模型不得参与判定自己的输出</div>
+    </div>
+    <div class="pipe">
+      <div class="step"><div class="n">STEP 1</div><h4>问题理解</h4><p>领域识别、概念消歧、意图分类</p></div>
+      <div class="step"><div class="n">STEP 2</div><h4>断言分解</h4><p>拆成 1–7 条可独立证伪的原子命题</p></div>
+      <div class="step"><div class="n">STEP 3</div><h4>三路召回</h4><p>正文 + 摘要 + 图谱邻居，段落级锚定</p></div>
+      <div class="step"><div class="n">STEP 4</div><h4>证据结构化</h4><p>方向 / 研究类型 / 样本量 / 物种 / offset</p></div>
+      <div class="step key"><div class="n">STEP 5 · 护城河</div><h4>独立验证器</h4><p>规则先行 → 小模型判定 → 大模型只处理不确定区</p></div>
+      <div class="step"><div class="n">STEP 6</div><h4>置信校准</h4><p>A–D 等级 + 冲突在哪一层 + 如何升级</p></div>
+    </div>
+    <p class="pipe-note">每一次输出都写入 <strong>Run Ledger</strong>（数据快照 / 模型版本 / 提示版本 / 工具轨迹 / 随机性），因此可回放、可对比、可审计——结论翻案也能被看见。</p>
+  </section>
+
+  <!-- 04 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">04</div>
+      <h2>技术底座分层</h2>
+      <div class="note">10 人团队：运维复杂度就是最大的技术风险</div>
+    </div>
+    <table>
+      <tr><th style="width:110px">层</th><th>关键能力</th><th style="width:270px">选型取向</th></tr>
+      <tr><td><strong>交付</strong></td><td>Workbench · Report Studio · API · 私有化镜像</td><td class="num">Next.js · Helm · 离线包</td></tr>
+      <tr><td><strong>编排</strong></td><td>长任务持久化、沙箱执行、人工审批门、四重预算</td><td class="num">Temporal · 无网沙箱</td></tr>
+      <tr><td><strong>推理</strong></td><td>断言验证、冲突聚类、置信校准、主动学习</td><td class="num">Verifier 集成 · 小模型自托管</td></tr>
+      <tr><td><strong>检索</strong></td><td>混合检索 + 2-hop 图谱扩展 + rerank</td><td class="num">BM25 + pgvector</td></tr>
+      <tr><td><strong>知识</strong></td><td>本体对齐、实体链接、双时态图谱、版本快照</td><td class="num">Postgres 邻接 + CTE</td></tr>
+      <tr><td><strong>数据</strong></td><td>Bronze/Silver/Gold、全链路 lineage、许可追踪</td><td class="num">S3 + Iceberg + dbt</td></tr>
+      <tr><td><strong>平台</strong></td><td>多租户、RBAC、SSO、审计、配额、成本归因</td><td class="num">OTel · 单一 ModelGateway</td></tr>
+    </table>
+  </section>
+
+  <!-- 05 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">05</div>
+      <h2>36 个月路线</h2>
+      <div class="note">每季一个主题；未完成不得叠加新承诺</div>
+    </div>
+    <div class="tl">
+      <div class="ph">
+        <div class="q">PHASE 0</div>
+        <h3>打通一条链</h3>
+        <div class="span">Q1–Q2 · 0–6 月</div>
+        <ul>
+          <li>用数据选定主领域（1 + 1 验证）</li>
+          <li>5k 篇全文 / 证据图 v0</li>
+          <li>Claim Card v0 + Run Ledger</li>
+          <li>10 家设计伙伴周活</li>
+        </ul>
+        <div class="exit">退出线：200 条盲评 ≥90%；单卡 ≤$1.5</div>
+      </div>
+      <div class="ph">
+        <div class="q">PHASE 1</div>
+        <h3>产品化</h3>
+        <div class="span">Q3–Q4 · 6–12 月</div>
+        <ul>
+          <li>多租户 SaaS、SSO、审计</li>
+          <li>评测门禁进 CI</li>
+          <li>生物安全拦截上线</li>
+          <li>学术版 GA + 首批付费</li>
+        </ul>
+        <div class="exit">退出线：召回 ≥82%；300 WAU；转化 ≥5%</div>
+      </div>
+      <div class="ph">
+        <div class="q">PHASE 2</div>
+        <h3>规模化 + 产业版</h3>
+        <div class="span">Q5–Q7 · 12–21 月</div>
+        <ul>
+          <li>私有化部署包（≤5 人日）</li>
+          <li>客户内部数据连接器</li>
+          <li>SOC 2 Type II</li>
+          <li>主动学习闭环 + 公开报告</li>
+        </ul>
+        <div class="exit">退出线：F1 ≥0.88；企业续约 ≥2</div>
+      </div>
+      <div class="ph">
+        <div class="q">PHASE 3</div>
+        <h3>平台化与公共品</h3>
+        <div class="span">Q8+ · 21–36 月</div>
+        <ul>
+          <li>开放 Claim Card API</li>
+          <li>第 3–4 个领域</li>
+          <li>实验闭环 / CRO 集成</li>
+          <li>公益席位 5% 推理预算</li>
+        </ul>
+        <div class="exit">退出线：领域复用 ≥70%；外部应用 ≥10</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">06</div>
+      <h2>指标看板</h2>
+      <div class="note">每季度只看这九个</div>
+    </div>
+    <table>
+      <tr><th>类别</th><th>指标</th><th class="num">Q2</th><th class="num">Q4</th><th class="num">Q6</th><th class="num">Q8</th></tr>
+      <tr class="hl"><td>价值</td><td>周采纳假设数（NSM）</td><td class="num">150</td><td class="num">900</td><td class="num">3,000</td><td class="num">8,000</td></tr>
+      <tr><td>价值</td><td>采纳率</td><td class="num">20%</td><td class="num">25%</td><td class="num">28%</td><td class="num">30%</td></tr>
+      <tr><td>质量</td><td>专家盲评可用率</td><td class="num">75%</td><td class="num">80%</td><td class="num">85%</td><td class="num">88%</td></tr>
+      <tr><td>信任</td><td>无来源断言率</td><td class="num">&lt;3%</td><td class="num">&lt;2%</td><td class="num">&lt;1%</td><td class="num">&lt;0.5%</td></tr>
+      <tr><td>效率</td><td>单卡成本</td><td class="num">$1.5</td><td class="num">$0.6</td><td class="num">$0.3</td><td class="num">$0.2</td></tr>
+      <tr><td>商业</td><td>付费用户 / 企业客户</td><td class="num">0</td><td class="num">60 / 0</td><td class="num">400 / 2</td><td class="num">1.2k / 5</td></tr>
+    </table>
+  </section>
+
+  <!-- 07 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">07</div>
+      <h2>纪律</h2>
+      <div class="note">写下不做的事，比写下要做的事更能定义公司</div>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h3>三条不可越的线</h3>
+        <ul>
+          <li><strong>版权</strong>：只用开放获取 / 客户自带 / 已授权语料。不建影子图书馆。</li>
+          <li><strong>生物安全</strong>：双用途请求硬拦截 + 企业 KYC + 年度外部评审，即使对方声称防御目的。</li>
+          <li><strong>科研诚信</strong>：不代写论文、不做同行评审、不提供降重规避；导出强制携带 AI 使用元数据。</li>
+        </ul>
+        <p class="small">这三条会让增长慢一点。信任就是产品，合规就是营销。</p>
+      </div>
+      <div class="card no">
+        <h3>明确不做</h3>
+        <ul>
+          <li>不做通用聊天助手</li>
+          <li>不训练基础大模型</li>
+          <li>24 个月内不做临床诊断</li>
+          <li>前 18 个月不做全学科覆盖</li>
+          <li>定制只做配置，不做代码分支</li>
+          <li>不接要求隐藏 AI 使用的客户</li>
+        </ul>
+        <p class="small">每季度一次 Kill Review：继续 / 转向 / 停止，必须有人签字。</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="q">如果三年后我们只有一个漂亮的对话界面和一条增长曲线，那说明这件事我们做错了。</div>
+    <div>docs/00–04 · 详细论证与待验证假设</div>
+  </footer>
+
+</div>
+</body>
+</html>
